@@ -1,0 +1,43 @@
+<html>
+	<head>
+		{% if title %}
+		<title> {{title}} - microblog </title>
+		{% else %}
+		<title> microblog </title>
+		{% endif %}
+		
+    		
+		<script src="/static/js/moment.min.js"></script>
+		<link href="/static/css/style2.css" rel="stylesheet" type="text/css">
+		
+	</head>
+	<body>
+		<div> Poste: 
+		{% if not(g.user.is_authenticated)%}
+		| <a href = "{{url_for('login')}}">login</a>
+		| <a href = "{{url_for('registr')}}">registr</a>
+		{% else%}
+		| <a href = "{{ url_for('start', nickname = g.user.nickname)}}">user</a>
+		| <a href = "{{ url_for('index')}}">new letter</a>
+		| <a href = "{{ url_for('user', nickname = g.user.nickname)}}">message</a>
+		| <a href = "{{url_for('logout')}}">Logout</a>
+		{% endif %}	
+		
+		<div align="right" style="position: absolute; margin-left: 70%; margin-top: 10px;">
+		
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul style = "color: red">
+		{% for message in messages %}
+			<li> {{message}} </li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+		{% endwith %}
+		</div>
+		</div>
+		<hr>
+		{% block content %} {% endblock %}
+	</body>
+</html>
+

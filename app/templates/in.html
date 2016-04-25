@@ -1,0 +1,55 @@
+<!--extend from base layout -->
+{% extends "base.html" %}
+{% block content %}
+<link href="/static/css/style1.css" rel="stylesheet" type="text/css">
+
+<script type = "text/javascript">
+function set_openid(openid, pr)
+{
+	u = openid.search('<username>')
+	if (u!= -1) {
+		user = prompt('Enter your' + pr + 'username:')
+		openid = openid.substr(0,u) + user
+	}
+	form = document.forms['login'];
+	form.elements['openid'].value = openid
+}
+</script>
+<link href="/static/css/style1.css" rel="stylesheet" type="text/css">
+<div id="clouds">
+	<div class="cloud x1"></div>
+
+	<!-- Time for multiple clouds to dance around -->
+	<div class="cloud x2"></div>
+	<div class="cloud x3"></div>
+	<div class="cloud x4"></div>
+	<div class="cloud x5"></div>
+</div>
+
+ <div class="container">
+
+
+      <div id="login">
+
+        <form action = "" method  = "post" name = "login">
+	{{form.hidden_tag()}}
+
+          <fieldset class="clearfix">
+		Login
+            <p><span class="fontawesome-user"></span>
+		{{form.openid(size = 80)}}
+            <p><span class="fontawesome-lock"></span>
+		{{form.openpassword(size = 80)}}
+ <!-- JS because of IE support; better: placeholder="Password" -->
+            <p><input type="submit" value="log in"></p>
+
+          </fieldset>
+
+        </form>
+
+        <p> <a href = "{{url_for('registr')}}" class="blue">Registration</a></p>
+
+      </div> <!-- end login -->
+
+    </div>
+{% endblock %}

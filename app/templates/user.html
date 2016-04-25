@@ -1,0 +1,100 @@
+<!--extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+
+
+<br>
+<link href="/static/css/style2.css" rel="stylesheet" type="text/css">
+<link href="/static/css/style.css" rel="stylesheet" type="text/css">
+
+<div id="raz">
+  <div><span>in</span>
+{% if mes_from %}
+<table width='90%' style="max-width: 100% !important;">
+	<tr>
+		<td> </td>
+		<td> from </td>
+		<td> to </td> 
+		<td> timestamp </td>
+		<td> message </td>
+		<td> </td>
+	</tr>
+{% for post in mes_from %}
+
+	<tr valogn = "top">
+	<td><img src = "/static/message-icon.png" height = 30 width = 30 ></td>
+	<td style="word-wrap: break-word; width: 10%; max-width: 10%;"> <i>  {{post.from}} </i></td> 
+	<td style="word-wrap: break-word; width: 10%; max-width: 10%;"> {{post.to}}	</td>
+	<td style="word-wrap: break-word; width: 14%; max-width: 14%;"> {{momentjs(post.timestamp).format('LLL')}} </td>
+	<td style="word-wrap: break-word; width: 400px; max-width: 400px;"> {{post.body}}</td>
+	<td><a href = "/delete/{{post.id}}">
+		<img src = "/static/del.png" height = 20 width = 20 > </a>  </td>
+</tr>
+{% endfor %}
+
+</table>
+{% else %}
+no one written letter to me((
+{% endif %}
+</div>
+  <div><span>out</span>
+{% if mes_to %}
+<table width='90%' style="max-width: 100% !important;">
+	<tr>
+		<td> </td> 
+		<td> from </td>
+		<td> to </td> 
+		<td> timestamp </td> 
+		<td>message </td>
+	</tr>
+{% for post in mes_to %}
+	<tr valogn = "top">
+	<td><img src = "/static/message-icon.png" height = 30 width = 30 ></td>
+	<td style="word-wrap: break-word; width: 10%; max-width: 10%;"> <i>  {{post.from}} </i></td> 
+	<td style="word-wrap: break-word; width: 10%; max-width: 10%;"> {{post.to}}	</td>
+	<td style="word-wrap: break-word; width: 14%; max-width: 14%;"> {{momentjs(post.timestamp).format('LLL')}} </td>
+	<td style="word-wrap: break-word; width: 400px; max-width: 400px;"> {{post.body}}</td>
+	<td><a href = "/delete/{{post.id}}">
+		<img src = "/static/del.png" height = 20 width = 20 > </a> </td>
+</tr>
+{% endfor %}
+</table>
+{%else%}
+I didn't send message
+{% endif %}</div>
+  <div><span>not_out</span>
+{% if mes_draft %}
+<table width='90%' style="max-width: 100% !important;">
+	<tr>
+		<td> </td> 
+		<td> from </td>
+		<td> to </td> 
+		<td> timestamp </td>
+		<td>message </td>
+	</tr>
+
+{% for post in mes_draft %}
+	<tr valogn = "top">
+	<td><a href = "/update/{{post.id}}"> <img src = "/static/strelka.png" height = 30 width = 30 ></a></td>
+	<td style="word-wrap: break-word; width: 10%; max-width: 10%;"> <i>  {{post.from}} </i></td> 
+	<td style="word-wrap: break-word; width: 10%; max-width: 10%;"> {{post.to}}	</td>
+	<td style="word-wrap: break-word; width: 14%; max-width: 14%;"> {{momentjs(post.timestamp).format('LLL')}} </td>
+	<td style="word-wrap: break-word; width: 400px; max-width: 400px;"> {{post.body}}</td>
+	<td><a href = "/delete/{{post.id}}"><img src = "/static/del.png" height = 20 width = 20 > </a>  </td>
+	<td><a href = "{{ url_for('index', id_post = post.id) }}"><img src = "/static/edit.png" height = 20 width = 20 > </a>  </td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+	Ohhhh, I haven't draft
+{% endif %}
+
+</div>
+ 
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,13 @@
+<!--extend from base layout -->
+{% extends "base.html" %}
+{% block content %}
+
+{% if not (g.user.is_authenticated)%}
+		Welcome! please authorisated 
+{% else %}
+
+<a href = "/user/{{g.user.nickname}}"> 
+<p style = "margin-left: 16%; margin-top : 40px;color : white; z-index: 3;  position: relative;font-size:600%">Welcome!</p><p style = "margin-left: -10%; margin-top : 100px;" ></p></a>
+{% endif %}
+{% endblock %}
+

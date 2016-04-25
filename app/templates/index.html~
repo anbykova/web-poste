@@ -1,0 +1,71 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+<link href="/static/css/style1.css" rel="stylesheet" type="text/css">
+
+
+ <div class="container">
+
+  
+
+        <form action = "" method  = "post" name = "login">
+		{{form.hidden_tag()}}
+          <fieldset class="clearfix">
+	  <style>
+		input[type="text"], textarea{
+			border-radius: 3px;
+			border: 1px solid #fff;
+			margin: 5px;
+		}
+	  </style>
+		<table>
+		<tr> <p style = " color : white; z-index: 3;  position: relative;font-size:150%">Please enter your message</p>
+	</tr>
+            <p><tr><td>to:</td>
+		<td>{{form.nick(size = 30)}}</td></tr>
+            <p><tr><td>message:</td>
+		<td>{{form.post(rows = 3, cols = 32)}}</td></tr>
+		</table>
+	    <p><span class="fontawesome-ok"></span>
+		{{form.check(size = 100)}} to mail
+<form>
+<table style="display: none;" id="for_mail">	
+   <tr><td> from: </td><td> {{form.from_(size = 30, maxlength = 140)}} </td></tr>
+   <tr> <td> password:</td> <td>{{form.password(size = 30, maxlength = 140)}}</td></tr>
+</table>
+</form>
+<style>
+.b1 {
+  background-color: #ea4c88;
+  color: #eee;
+  font-weight: bold;
+  margin-bottom: 2em;
+  text-transform: uppercase;
+  width: 170px;
+}
+</style>
+ <!-- JS because of IE support; better: placeholder="Password" -->
+            <td ><input type="submit" value="send" name = "submit" class = "b1"></td>
+	    <td><input type="submit" value="draft" class = "b1" name = "submit"></td>
+</fieldset>		
+
+          
+
+        </form>
+
+        
+
+     
+
+    </div>
+<script>
+	document.getElementById("check").onclick = function(){
+		if(document.getElementById("check").checked){
+			document.getElementById("for_mail").style.display = "table";
+		}
+		else{
+			document.getElementById("for_mail").style.display = "none";
+		}
+	}
+</script>
+{% endblock %}
